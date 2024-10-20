@@ -2,6 +2,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('[data-tab-button]')
     const questions = document.querySelectorAll('[data-faq-question]')
 
+    const heroSection = document.querySelector('.hero')
+    const alturaHero = heroSection.clientHeight
+
+    window.addEventListener('scroll', function() {
+        const posicaoAtual = window.scrollY
+
+        if (posicaoAtual < alturaHero) {
+            ocultaElementosHeader()
+        } else {
+            exibeElementosHeader()
+        }
+    })
+
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function(botao) {
@@ -18,6 +31,17 @@ document.addEventListener('DOMContentLoaded', function() {
         questions[i].addEventListener('click', abreOuFechaResposta)
     }
 })
+
+function ocultaElementosHeader() {
+    const cabecalho = document.querySelector('header')
+    cabecalho.classList.add('header--is-hidden')
+}
+
+function exibeElementosHeader() {
+    const cabecalho = document.querySelector('header')
+    cabecalho.classList.remove('header--is-hidden')
+}
+
 
 function abreOuFechaResposta(elemento) {
     const classe = 'faq__questions__item--is-open'
